@@ -14,7 +14,16 @@ export default class App {
 
     private onLoad() {
         console.log("Page Load");
+        this.showStored();
         this.bindUI();
+    }
+
+    private showStored() {
+        const text = localStorage.getItem("TEXT");
+        const div = document.querySelector("#text-dsiplay");
+        if (div instanceof HTMLDivElement) {
+            div.textContent = text || "NOT SET RAW";
+        }
     }
 
     private bindUI() {
@@ -26,7 +35,10 @@ export default class App {
 
     private getData() {
         WebRequest.get("/data/fish.json")
-            .then(c => alert(JSON.stringify(c)));
+            .then(c => {
+                const text = prompt(JSON.stringify(c));
+                localStorage.setItem("TEXT", text || "NOT SET SAVE");
+            });
     }
 
     private registerServiceWorker() {
