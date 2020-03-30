@@ -1,0 +1,7 @@
+[
+    "./",
+    "./index.html",
+    "./app.bundle.js",
+    "./manifest.webmanifest",
+    "./data/fish.json"
+]

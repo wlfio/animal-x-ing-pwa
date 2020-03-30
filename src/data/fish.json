@@ -1,0 +1,31 @@
+[
+    {
+        "name": "Carp",
+        "months": {
+            "northern": [],
+            "southern": []
+        },
+        "times": [
+            {
+                "from": 4,
+                "to": 8
+            }
+        ],
+        "size": "Large",
+        "location": "River",
+        "criteria": [
+            {
+                "type": "rain",
+                "condition": "required"
+            },
+            {
+                "type": "rain",
+                "condition": "increase"
+            },
+            {
+                "type": "rain",
+                "condition": "decrease"
+            }
+        ]
+    }
+]
