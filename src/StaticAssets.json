@@ -2,6 +2,10 @@
     "./",
     "./index.html",
     "./app.bundle.js",
+    "./app.css",
     "./manifest.webmanifest",
-    "./data/fish.json"
+    "./data/fish.json",
+    "./page/fish.html",
+    "./page/bugs.html",
+    "./page/main.html"
 ]

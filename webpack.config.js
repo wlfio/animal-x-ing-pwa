@@ -1,5 +1,6 @@
 const path = require("path");
 const CopyPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 //typings install dt~service_worker_api --global --save
 
@@ -15,9 +16,13 @@ module.exports = {
                 use: 'ts-loader',
                 exclude: /node_modules/,
             },
+            // {
+            //     test: /\.css$/i,
+            //     use: ['style-loader', 'css-loader'],
+            // },
             {
                 test: /\.css$/i,
-                use: ['style-loader', 'css-loader'],
+                use: [MiniCssExtractPlugin.loader, 'css-loader'],
             },
         ],
     },
@@ -26,8 +31,10 @@ module.exports = {
             { from: 'src/index.html', to: "index.html" },
             { from: 'src/manifest.webmanifest', to: "manifest.webmanifest" },
             { from: 'src/images/icons/**/*', to: "images/icons/", flatten: true },
+            { from: 'src/page/**/*', to: "page/", flatten: true },
             { from: 'src/data/**/*', to: "data/", flatten: true },
-        ])
+        ]),
+        new MiniCssExtractPlugin()
     ],
     resolve: {
         extensions: ['.tsx', '.ts', '.js'],

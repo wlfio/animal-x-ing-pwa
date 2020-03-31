@@ -1,11 +1,17 @@
 import WebRequest from "./Services/WebRequest";
+import Nav from "./Components/Nav";
 
 export default class App {
+
+    private nav: Nav;
+
     public static Factory(): App {
         return new App();
     }
 
-    constructor() { }
+    constructor() {
+        this.nav = new Nav();
+    }
 
     public run() {
         window.addEventListener("load", () => this.onLoad());
@@ -16,6 +22,7 @@ export default class App {
         console.log("Page Load");
         this.showStored();
         this.bindUI();
+        this.nav.init();
     }
 
     private showStored() {

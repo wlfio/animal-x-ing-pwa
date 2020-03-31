@@ -6,14 +6,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>wlf.io</title>
     <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="stylesheet" href="/app.css" />
     <script src="./app.bundle.js" defer></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
-    <button>GET DATA</button>
-    <div id="text-dsiplay"></div>
-    <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a
-            href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="/page/main.html" class="brand-logo">&nbsp;&nbsp;<img
+                    src="images/icons/32.png" />&nbsp;&nbsp;Logo</a>
+            <a href="#" data-target="slide-out" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="/page/fish.html">Fish</a></li>
+                <li><a href="/page/bugs.html">Bugs</a></li>
+            </ul>
+        </div>
+    </nav>
+    <ul id="slide-out" class="sidenav">
+        <li>
+            <div class="background user-view"><a href="/page/fish.html">
+                    <img src="images/icons/64.png">
+                    <h2>Wlf.io</h2>
+                </a>
+            </div>
+        </li>
+        <li><a href="/page/fish.html">Fish</a></li>
+        <li><a href="/page/bugs.html">bugs</a></li>
+        <li>
+            <div class="divider"></div>
+        </li>
+        <li><a class="subheader">Subheader</a></li>
+        <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+    </ul>
+    <div id="main-content"></div>
 </body>
 
 </html>
