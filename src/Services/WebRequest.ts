@@ -25,6 +25,7 @@ export default class WebRequest {
     private static fetch(url: string, params?: { [s: string]: any }): Promise<any> {
         return new Promise((resolve, reject) => {
             fetch(url, params)
+                .then(WebRequest.successCheck)
                 .then(WebRequest.requestResponseCast)
                 .then(resolve)
                 .catch(reject);
@@ -56,4 +57,10 @@ export default class WebRequest {
         return WebRequest.methodGeneric(url, "DELETE", body, json);
     }
 
+    private static successCheck(response: Response): any {
+        if (response.status >= 400) {
+            throw response;
+        }
+        return response;
+    }
 }

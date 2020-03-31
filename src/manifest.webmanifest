@@ -3,7 +3,7 @@
     "short_name": "wlf.io",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#fff",
+    "background_color": "#1e1e1e",
     "description": "wlf.io pwa",
     "icons": [
         {

@@ -1,11 +1,13 @@
 import StaticAssets from "./StaticAssets.json";
+import WebRequest from "./Services/WebRequest";
 
 (function () {
 
     class Worker {
         private static instance: Worker | null = null;
 
-        public static readonly CacheName = "pwaCache";
+        public static readonly CachePrefix = "pwaCache";
+        public static readonly CacheName = Worker.CachePrefix + "-v0.0.1";
 
         public static Factory(): Worker {
             if (Worker.instance === null) {
@@ -16,21 +18,45 @@ import StaticAssets from "./StaticAssets.json";
 
         private constructor() {
             self.addEventListener("install", async () => await this.install());
-            self.addEventListener("activate", () => this.activate());
+            // @ts-ignore
+            self.addEventListener("activate", (e: ExtendableEvent) => this.activate(e));
             // @ts-ignore
             self.addEventListener("fetch", async (e: FetchEvent) => await this.onFetch(e));
         }
 
         public run() {
-
+            console.log("SW BOOT");
+            this.updateCheck();
         }
 
-        private activate() {
+        private activate(e: ExtendableEvent) {
+            console.log("SW activate");
             self.clients.claim();
+            this.cleanOldCaches(e);
+        }
+
+        private cleanOldCaches(e: ExtendableEvent) {
+            e.waitUntil(
+                caches.keys().then(keys => {
+                    return Promise.all(
+                        keys
+                            .filter(key => key.startsWith(Worker.CachePrefix) && key !== Worker.CacheName)
+                            .map(key => caches.delete(key))
+                    )
+                })
+            );
+        }
+
+        private updateCheck() {
+            WebRequest.get("/")
+                .then(() => {
+                    this.install();
+                })
+                .catch(console.error);
         }
 
         private async install() {
-            console.log("INSTALL");
+            console.log("install");
             const cache = await caches.open(Worker.CacheName);
             await cache.addAll(StaticAssets);
             return self.skipWaiting();
